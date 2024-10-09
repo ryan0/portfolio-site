@@ -1,22 +1,26 @@
 name: Build
 run-name: Build ${{github.ref}} run by ${{ github.actor }}
+
 on:
   push:
     branches-ignore:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci
 
-      - name: Build project
+      - name: Build
         run: npm run build
