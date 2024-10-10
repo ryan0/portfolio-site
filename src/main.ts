@@ -3,6 +3,7 @@ import {initShaderProgram} from "./shader-util.ts";
 
 import {mat4} from 'gl-matrix';
 
+const env = import.meta.env
 
 
 
@@ -70,8 +71,8 @@ function main() {
     gl.depthFunc(gl.LEQUAL) //Near objects obscure distant ones
 
 
-    const vertShaderPromise = fetch('/shaders/shader.vert').then(file => file.text());
-    const fragShaderPromise = fetch('/shaders/shader.frag').then(file => file.text());
+    const vertShaderPromise = fetch(env.BASE_URL + 'shaders/shader.vert').then(file => file.text());
+    const fragShaderPromise = fetch(env.BASE_URL + 'shaders/shader.frag').then(file => file.text());
     Promise.all([vertShaderPromise, fragShaderPromise]).then(shaderStrings => {
         const shaderProgram = initShaderProgram(gl, shaderStrings[0], shaderStrings[1]);
         if (!shaderProgram) {
