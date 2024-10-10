@@ -25,7 +25,7 @@ jobs:
         run: ssh prod 'cd ${{ secrets.WORK_DIR }} && npm install && npm run build:prod'
 
       - name: Sync build result
-        run: ssh prod 'rsync -a --delete ${{ secrets.WORk_DIR }}/dist ${{ secrets.SITE_DIR }}'
+        run: ssh prod 'rsync -a --delete ${{ secrets.WORk_DIR }}/dist/ ${{ secrets.SITE_DIR }}'
 
       - name: Cleanup
         run: rm -rf ~/.ssh
