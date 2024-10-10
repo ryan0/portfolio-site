@@ -3,6 +3,8 @@ on:
 
 jobs:
   run-deploy:
+    name: Deploy Production
+    runs-on: ubuntu-latest
     steps:
       - name: install ssh keys
         run: |
