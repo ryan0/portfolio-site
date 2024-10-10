@@ -1,0 +1,28 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  run-deploy:
+    steps:
+      - name: install ssh keys
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          cat >>~/.ssh/config <<END
+          Host prod
+            HostName ${{ secrets.SSH_HOST }}
+            User ${{ secrets.SSH_USER }}
+            StrictHostKeyChecking no
+          END
+
+      - name: connect and pull
+        run: ssh prod 'cd ${{ secrets.WORK_DIR }} && git fetch && git reset --hard origin ${{ secrets.MAIN_BRANCH }}'
+
+      - name: Install & Build
+        run: ssh prod 'cd ${{ secrets.WORK_DIR }} && npm install && npm run build:prod'
+
+      - name: Sync build result
+        run: ssh prod 'rsync -a --delete ${{ secrets.WORk_DIR }}/dist ${{ secrets.SITE_DIR }}
+
+      - name: Cleanup
+        run: rm -rf ~/.ssh

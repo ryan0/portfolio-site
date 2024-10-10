@@ -40,23 +40,17 @@ h1 {
   padding: 2rem;
 }
 
-.hero-content {
-  margin-top: 300px;
-  margin-bottom: 200px;
-}
-
 .top-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  padding: 12px;
   background-color: #131313;
 
   nav {
-    width: 100%;
     max-width: 920px;
     margin: 0 auto;
+    padding: 16px;
     display: flex;
     justify-content: space-between;
 
@@ -64,7 +58,56 @@ h1 {
       display: flex;
       justify-content: space-between;
       width: 350px;
+
+      @media (max-width: 510px){
+        display: none;
+      }
     }
+  }
+}
+
+.hero-content {
+  margin-top: 300px;
+  margin-bottom: 200px;
+
+  @media (max-width: 900px) {
+    margin-top: 200px;
+    margin-bottom: 120px;
+  }
+}
+
+#about {
+  h2 {
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 1.2em;
+  }
+
+}
+
+.experience-border {
+
+  h3 {
+    margin-bottom: 4px;
+  }
+  em {
+    font-size: .9em;
+    font-style: italic;
+    font-family: sans-serif;
+  }
+  em, p {
+    margin-left: 6px;
+  }
+  p {
+    margin-bottom: 2px;
+  }
+
+  @media (min-width: 720px) {
+    border-left: 1px solid white;
+    padding-left: 44px;
+    margin-left: -16px;
   }
 }
 
@@ -76,14 +119,16 @@ h1 {
   @media (max-width: 800px) {
     grid-template-columns: auto auto;
   }
-  @media (max-width: 600px) {
+  @media (max-width: 520px) {
     grid-template-columns: 1fr;
+    gap: 34px;
   }
 
   .project {
     padding: 10px;
-    border: #747bff 1px solid;
-    border-radius: 10px;
+    background-color: #131313;
+    box-shadow: 2px 3px 5px #131313;
+    border-radius: 4px;
     overflow: hidden;
     img {
       width: calc(100% + 20px);
@@ -106,18 +151,5 @@ h1 {
   li {
     list-style-type: none;
     margin: 18px;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
