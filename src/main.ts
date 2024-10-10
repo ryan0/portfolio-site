@@ -9,6 +9,8 @@ const env = import.meta.env
 
 let xRotation = 0;
 let yRotation = 0;
+let pointSize = 1.0;
+let yOffset = 0;
 function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTime: number) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // Clear the canvas
 
@@ -23,7 +25,7 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
     const modelViewMatrix = mat4.create();
 
     xRotation += deltaTime / 10000;
-    mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.5, -4.0]);
+    mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.5 + yOffset, -4.0]);
     mat4.rotate(modelViewMatrix, modelViewMatrix, xRotation, [1, 0, 0]);
 
     yRotation += deltaTime / 30000;
@@ -36,6 +38,7 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
     // Set the shader uniforms
     gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, projectionMatrix);
     gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
+    gl.uniform1f(programInfo.uniformLocations.pointSize, pointSize);
 
     gl.drawArrays(gl.POINTS, 0, 24000);
 }
@@ -49,6 +52,7 @@ interface ProgramInfo {
     uniformLocations: {
         projectionMatrix: WebGLUniformLocation,
         modelViewMatrix: WebGLUniformLocation,
+        pointSize: WebGLUniformLocation
     },
 }
 
@@ -81,7 +85,8 @@ function main() {
 
         const projectionMatrix = gl.getUniformLocation(shaderProgram, 'uProjectionMatrix');
         const modelViewMatrix = gl.getUniformLocation(shaderProgram, 'uModelViewMatrix');
-        if (!projectionMatrix || !modelViewMatrix) {
+        const pointSize = gl.getUniformLocation(shaderProgram, 'uPointSize');
+        if (!projectionMatrix || !modelViewMatrix || !pointSize) {
             return null;
         }
 
@@ -93,7 +98,8 @@ function main() {
             },
             uniformLocations: {
                 projectionMatrix,
-                modelViewMatrix
+                modelViewMatrix,
+                pointSize
             },
         };
 
@@ -190,6 +196,21 @@ function resizeCanvas(gl: WebGL2RenderingContext) {
         gl.canvas.width = gl.canvas.clientWidth;
         gl.canvas.height = gl.canvas.clientHeight;
     }
+
+    if(gl.canvas.width < 1000) {
+        pointSize = 2.0;
+    } else {
+        pointSize = 1.0;
+    }
+
+    if(gl.canvas.height < 600) {
+        yOffset = -0.6;
+    } else if (gl.canvas.width < 1000) {
+        yOffset = -0.4;
+    } else {
+        yOffset = -0.2;
+    }
+
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 }
 

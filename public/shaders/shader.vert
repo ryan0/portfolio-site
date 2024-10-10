@@ -4,10 +4,12 @@ attribute vec4 aVertexColor;
 uniform mat4 uModelViewMatrix;
 uniform mat4 uProjectionMatrix;
 
+uniform float uPointSize;
+
 varying lowp vec4 vColor;
 
 void main() {
     gl_Position = uProjectionMatrix * uModelViewMatrix * aVertexPosition;
-    gl_PointSize = 1.0;
+    gl_PointSize = uPointSize;
     vColor = aVertexColor;
 }
