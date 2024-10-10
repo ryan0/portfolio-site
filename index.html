@@ -8,10 +8,16 @@
     <meta property="og:locale" content="en_US">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Ryan Miller">
-    <meta property="og:description" content="Ryan Miller is a full-stack developer with a passion for crafting engaging digital experiences.">
+    <meta property="og:description"
+          content="Ryan Miller is a full-stack developer with a passion for crafting engaging digital experiences.">
     <meta property="og:url" content="https://rmiller.dev/">
     <meta property="og:image" content="https://rmiller.dev/og.png">
-    <link rel="icon" type="image/svg+xml" href="/vite.svg"/>
+    <link rel="icon" type="image/png" href="/favicon/favicon-48x48.png" sizes="48x48"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg"/>
+    <link rel="shortcut icon" href="/favicon/favicon.ico"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png"/>
+    <meta name="apple-mobile-web-app-title" content="Ryan Miller"/>
+    <link rel="manifest" href="/favicon/site.webmanifest"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Ryan Miller</title>
 </head>
@@ -33,13 +39,14 @@
     </nav>
 </div>
 
+<canvas id="top-gl-canvas"></canvas>
+
 <div class="hero-content section">
     <h1>Hi, my name is Ryan</h1>
     <h2>I'm a full-stack developer with a passion for crafting engaging digital experiences.</h2>
 </div>
-
-
-<div id="about" class="section">
+<div class="about section">
+    <a id="about" class="anchor"></a>
     <h2>About Me</h2>
     <p>With experience building dynamic user interfaces and architecting scalable web applications, I specialize in
         innovative and reliable software solutions. I collaborate with exceptional teams to deliver ambitious and
@@ -49,7 +56,8 @@
         applications and server-side code to experiments with web and native OpenGL—even writing embedded code to
         control the pumps in my reef tank—I've been passionately tinkering ever since.</p>
 </div>
-<div id="experience" class="section">
+<div class="section">
+    <a id="experience" class="anchor"></a>
     <h2>Experience</h2>
     <div class="experience-border">
         <h3>Vanguard (Via Infosystems) | October 2020-August 2024</h3>
@@ -109,60 +117,110 @@
         </ul>
     </div>
 </div>
-<div id="projects" class="section">
+<div class="project-section section">
+    <a id="projects" class="anchor"></a>
     <h2>Projects | Experiments | Games</h2>
     <div class="project-grid">
-        <div class="project">
-            <img src="project-imgs/thwomp-chat-img.png">
-            <h3>Thwomp Chat</h3>
+        <a class="project" href="https://github.com/ryan0/thwomp-chat-client">
+            <div class="light-up"></div>
+            <img src="/project-imgs/thwomp-chat-img.png" alt="image of thwomp chat site">
+            <h3>Thwomp Chat <em>&#8599;</em></h3>
             <p>In development, a web-app enabling authenticated users to connect with peers and create chat
                 groups. Built using Angular, Java Spring, and Websockets.</p>
-        </div>
-        <div class="project">
-            <img src="project-imgs/voxel-game-img.jpg">
-            <h3>3D Voxel Game</h3>
+        </a>
+        <a class="project" href="https://github.com/ryan0/Voxel-Rogue">
+            <div class="light-up"></div>
+            <img src="/project-imgs/voxel-game-img.jpg" alt="image of voxel game">
+            <h3>3D Voxel Game <em>&#8599;</em></h3>
             <p>Built using Unity and C#. Featuring procedural terrain generation, efficient
                 resource management, and voxel state propagation for interactive environments.</p>
-        </div>
-        <div class="project">
-            <img src="project-imgs/light-speed-img.jpg">
-            <h3>Lightspeed</h3>
+        </a>
+        <a class="project" href="https://ryan0.github.io/WebGL-06/">
+            <div class="light-up"></div>
+            <img src="/project-imgs/light-speed-img.jpg" alt="image of light speed webGL render">
+            <h3>Lightspeed <em>&#8599;</em></h3>
             <p>An interactive demo of some of the fun that can be had with GPU rendering in a web browser using
                 webGL.</p>
-        </div>
-        <div class="project">
-            <img src="project-imgs/asteroids-game-img.png">
-            <h3>Asteroids</h3>
+        </a>
+        <a class="project" href="https://github.com/ryan0/asteroids_clone_sdl">
+            <div class="light-up"></div>
+            <img src="/project-imgs/asteroids-game-img.png" alt="image of asteroids game">
+            <h3>Asteroids <em>&#8599;</em></h3>
             <p>A clone of your favorite asteroid shooter, built using C++ and SDL.</p>
-        </div>
-        <div class="project">
-            <img src="project-imgs/portfolio-site-img.png">
-            <h3>This Site!</h3>
+        </a>
+        <a class="project" href="https://github.com/ryan0/portfolio-site">
+            <div class="light-up"></div>
+            <img src="/project-imgs/portfolio-site-img.png" alt="image of this site">
+            <h3>This Site! <em>&#8599;</em></h3>
             <p>A single-page portfolio site, currently under construction, listing all the reasons you might consider
                 hiring me! Built using TypeScript, Vite, and GitHub workflows for CI/CD.</p>
-        </div>
-        <div class="project">
-            <img src="project-imgs/vid-call-img.png">
-            <h3>Video Call Site</h3>
+        </a>
+        <a class="project" href="https://github.com/ryan0/vid-chat-app">
+            <div class="light-up"></div>
+            <img src="/project-imgs/vid-call-img.png" alt="image of video call site">
+            <h3>Video Call Site <em>&#8599;</em></h3>
             <p>Developed a web application enabling authenticated users to engage in real-time video calls
                 using vanilla JavaScript, Socket.IO, WebRTC, and Node.js Express for backend.</p>
-        </div>
+        </a>
     </div>
 </div>
-<div id="skills" class="section">
+<div id="skills" class="skills section">
     <h2>Skills</h2>
-    <ul>
-        <li>Programming Languages: TypeScript, JS, Java, C#, PHP, SQL, HTML, CSS, C, C++, Python, Go.</li>
-        <li>Frameworks & Libraries: Angular, React, AngularJS, Express, RxJS, Spring.</li>
-        <li>Tools & Platforms: AWS, DigitalOcean, Unix, Nginx, Git, npm, Node.js, Maven, CMake, Vite.</li>
-    </ul>
+    <div class="frameworks wrapper">
+        <img src="/skill-icons/frameworks-libs/angular.svg" alt="Angular" title="Angular">
+        <img src="/skill-icons/frameworks-libs/react.svg" alt="React" title="React">
+        <img src="/skill-icons/frameworks-libs/spring.svg" alt="Spring" title="Spring">
+    </div>
+    <div class="languages wrapper">
+        <img src="/skill-icons/languages/typescript.svg" alt="Typescript" title="Typescript">
+        <img src="/skill-icons/languages/javascript.svg" alt="JavaScript" title="JavaScript">
+        <img src="/skill-icons/languages/java.svg" alt="Java" title="Java">
+        <img src="/skill-icons/languages/c-sharp.svg" alt="C#" title="C#">
+        <img src="/skill-icons/languages/postgresql.svg" alt="Postgresql" title="Postgresql">
+        <img src="/skill-icons/languages/css3.svg" alt="CSS3" title="CSS3">
+        <img src="/skill-icons/languages/html5.svg" alt="HTML5" title="HTML5">
+        <img src="/skill-icons/languages/c.svg" alt="C" title="C">
+        <img src="/skill-icons/languages/python.svg" alt="Python" title="Python">
+        <img src="/skill-icons/languages/go.svg" alt="Go" title="Go">
+    </div>
+    <div class="tools-platforms wrapper">
+        <img src="/skill-icons/tools-platforms/git.svg" alt="Git" title="Git">
+        <img src="/skill-icons/tools-platforms/aws.svg" alt="AWS" title="AWS">
+        <img src="/skill-icons/tools-platforms/digital-ocean.svg" alt="Digital Ocean" title="DigitalOcean">
+        <img src="/skill-icons/tools-platforms/unix.svg" alt="Unix" title="Unix">
+        <img src="/skill-icons/tools-platforms/debian.svg" alt="Debian" title="Debian">
+        <img src="/skill-icons/tools-platforms/nginx.svg" alt="NGINX" title="NGINX">
+        <img src="/skill-icons/tools-platforms/npm.svg" alt="NPM" title="NPM">
+        <img src="/skill-icons/tools-platforms/apache-maven.svg" alt="Apache Maven" title="Apache Maven">
+        <img src="/skill-icons/tools-platforms/cmake.svg" alt="CMake" title="CMake">
+        <img src="/skill-icons/tools-platforms/vite.svg" alt="Vite" title="Vite">
+        <img src="/skill-icons/tools-platforms/nodejs.svg" alt="Node.js" title="Node.js">
+    </div>
+
 </div>
-<div id="contact">
+<div class="contact">
+    <a id="contact" class="anchor"></a>
     <div class="section">
         <h2>Contact</h2>
         <ul class="contact-info" style="margin-bottom: 20px">
             <li><a href="mailto:ryan@rmiller.dev" title="ryan@rmiller.dev">ryan@rmiller.dev</a></li>
-            <li><a href="https://github.com/ryan0">https://github.com/ryan0</a></li>
+            <li>
+            <a class="icon-link" href="https://github.com/ryan0" target="_blank"
+               rel="noreferrer noopener" aria-label="GitHub (opens in a new tab)" title="GitHub"><span class="sr-only">GitHub</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="h-6 w-6"
+                     aria-hidden="true">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+            <a class="icon-link" href="https://www.linkedin.com/in/ryan-rmiller-dev/" target="_blank"
+               rel="noreferrer noopener" aria-label="LinkedIn (opens in a new tab)" title="LinkedIn"><span
+                    class="sr-only">LinkedIn</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"
+                     aria-hidden="true">
+                    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
+                </svg>
+            </a>
+            </li>
         </ul>
     </div>
 </div>
