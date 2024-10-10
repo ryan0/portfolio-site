@@ -5,12 +5,19 @@ import {mat4} from 'gl-matrix';
 
 const env = import.meta.env
 
+const urlParams = new URLSearchParams(window.location.search);
+const inputRows = Number(urlParams.get("rows"));
+console.log(inputRows);
 
+const numRows = inputRows || 15;
+const numPoints = numRows * numRows * numRows;
 
 let xRotation = 0;
 let yRotation = 0;
-let pointSize = 1.0;
+let pointSize = 1.2;
 let yOffset = 0;
+let sizeOffset = 0;
+let sizeIncreasing = false;
 function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTime: number) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // Clear the canvas
 
@@ -23,6 +30,20 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
     const projectionMatrix = mat4.create();
     mat4.perspective(projectionMatrix, fieldOfView, aspect, zNear, zFar);
     const modelViewMatrix = mat4.create();
+
+    if(sizeOffset > 1.0) {
+        sizeIncreasing = !sizeIncreasing;
+        sizeOffset = 1.0;
+    }
+    if(sizeOffset < -0.6) {
+        sizeIncreasing = !sizeIncreasing;
+        sizeOffset = -0.6;
+    }
+
+    sizeOffset = sizeIncreasing?
+        sizeOffset + deltaTime / 3000 :
+        sizeOffset - deltaTime / 3000;
+
 
     xRotation += deltaTime / 10000;
     mat4.translate(modelViewMatrix, modelViewMatrix, [0.0, 0.5 + yOffset, -4.0]);
@@ -38,9 +59,9 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
     // Set the shader uniforms
     gl.uniformMatrix4fv(programInfo.uniformLocations.projectionMatrix, false, projectionMatrix);
     gl.uniformMatrix4fv(programInfo.uniformLocations.modelViewMatrix, false, modelViewMatrix);
-    gl.uniform1f(programInfo.uniformLocations.pointSize, pointSize);
+    gl.uniform1f(programInfo.uniformLocations.pointSize, pointSize + sizeOffset);
 
-    gl.drawArrays(gl.POINTS, 0, 24000);
+    gl.drawArrays(gl.POINTS, 0, numPoints);
 }
 
 interface ProgramInfo {
@@ -152,12 +173,12 @@ interface SimpleBuffers {
 function initBuffers(gl: WebGL2RenderingContext): SimpleBuffers | null {
     let positions = [];
     let i = 0;
-    for (let x = 0; x < 20; x++)
-        for (let y = 0; y < 20; y++)
-            for (let z = 0; z < 20; z++) {
-                positions[i] = x / 10.0 - 1.0;
-                positions[i + 1] = y / 10.0 - 1.0;
-                positions[i + 2] = z / 10.0 - 1.0;
+    for (let x = 0; x < numRows; x++)
+        for (let y = 0; y < numRows; y++)
+            for (let z = 0; z < numRows; z++) {
+                positions[i] = x / (numRows / 2)- 1.0;
+                positions[i + 1] = y / (numRows / 2) - 1.0;
+                positions[i + 2] = z / (numRows / 2) - 1.0;
                 i += 3;
             }
 
@@ -168,9 +189,9 @@ function initBuffers(gl: WebGL2RenderingContext): SimpleBuffers | null {
     let colors = [];
 
     i = 0;
-    for (let x = 0; x < 20; x++)
-        for (let y = 0; y < 20; y++)
-            for (let z = 0; z < 20; z++) {
+    for (let x = 0; x < numRows; x++)
+        for (let y = 0; y < numRows; y++)
+            for (let z = 0; z < numRows; z++) {
                 colors[i] = 0;
                 colors[i + 1] = 0;
                 colors[i + 2] = Math.min(Math.random() + .1, 1.0);
@@ -195,12 +216,6 @@ function resizeCanvas(gl: WebGL2RenderingContext) {
     if ("clientWidth" in gl.canvas && "clientHeight" in gl.canvas) {
         gl.canvas.width = gl.canvas.clientWidth;
         gl.canvas.height = gl.canvas.clientHeight;
-    }
-
-    if(gl.canvas.width < 1000) {
-        pointSize = 2.0;
-    } else {
-        pointSize = 1.0;
     }
 
     if(gl.canvas.height < 600) {
