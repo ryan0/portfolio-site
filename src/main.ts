@@ -128,9 +128,13 @@ function main() {
             }
 
             drawScene(gl, programInfo, deltaTime);
-            requestAnimationFrame(render);
         }
-        requestAnimationFrame(render);
+
+        setInterval (() => {
+            requestAnimationFrame(render);
+        }, 16)
+
+
     });
 }
 
@@ -150,7 +154,6 @@ function initBuffers(gl: WebGL2RenderingContext): SimpleBuffers | null {
                 positions[i + 2] = z / 10.0 - 1.0;
                 i += 3;
             }
-    console.log(positions);
 
     const positionBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
