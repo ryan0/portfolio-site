@@ -18,7 +18,7 @@ jobs:
           END
 
       - name: connect and pull
-        run: ssh prod 'cd ${{ secrets.WORK_DIR }} && git fetch && git reset --hard origin ${{ secrets.MAIN_BRANCH }}'
+        run: ssh prod 'cd ${{ secrets.WORK_DIR }} && git fetch && git reset --hard origin/${{ secrets.MAIN_BRANCH }}'
 
       - name: Install & Build
         run: ssh prod 'cd ${{ secrets.WORK_DIR }} && npm install && npm run build:prod'
