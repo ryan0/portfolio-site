@@ -57,6 +57,12 @@ h1 {
   padding: 2rem 2rem;
 }
 
+.section.opaque {
+  background: #24242477;
+  text-shadow: 1px 1px 3px #131313;
+  box-shadow: 0 0 15px #24242477;
+}
+
 .top-nav {
   position: fixed;
   top: 0;
@@ -256,6 +262,7 @@ div.project-section {
 
   .section {
     margin-bottom: 0;
+    background: #131313;
   }
 
   ul {
