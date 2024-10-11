@@ -1,5 +1,6 @@
 import './style.css';
-import {initShaderProgram} from "./shader-util.ts";
+import { initShaderProgram } from "./shader-util.ts";
+import { ProgramInfo, SimpleBuffers } from "./model/gl-helpers.model.ts";
 
 import {mat4} from 'gl-matrix';
 
@@ -7,7 +8,6 @@ const env = import.meta.env
 
 const urlParams = new URLSearchParams(window.location.search);
 const inputRows = Number(urlParams.get("rows"));
-console.log(inputRows);
 
 const numRows = inputRows || 15;
 const numPoints = numRows * numRows * numRows;
@@ -18,6 +18,7 @@ let pointSize = 1.2;
 let yOffset = 0;
 let sizeOffset = 0;
 let sizeIncreasing = false;
+
 function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTime: number) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT); // Clear the canvas
 
@@ -64,18 +65,6 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
     gl.drawArrays(gl.POINTS, 0, numPoints);
 }
 
-interface ProgramInfo {
-    program: WebGLProgram,
-    attribLocations: {
-        vertexPosition: GLint,
-        vertexColor: GLint,
-    },
-    uniformLocations: {
-        projectionMatrix: WebGLUniformLocation,
-        modelViewMatrix: WebGLUniformLocation,
-        pointSize: WebGLUniformLocation
-    },
-}
 
 function main() {
     const canvas = <HTMLCanvasElement>document.getElementById("top-gl-canvas");
@@ -159,17 +148,11 @@ function main() {
 
         setInterval (() => {
             requestAnimationFrame(render);
-        }, 16)
-
-
+        }, 16);
     });
 }
 
 
-interface SimpleBuffers {
-    position: WebGLBuffer,
-    color: WebGLBuffer
-}
 function initBuffers(gl: WebGL2RenderingContext): SimpleBuffers | null {
     let positions = [];
     let i = 0;
