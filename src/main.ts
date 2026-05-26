@@ -67,6 +67,7 @@ function drawScene(gl: WebGL2RenderingContext, programInfo: ProgramInfo, deltaTi
 
 
 function main() {
+    setCurrentYear();
     const canvas = <HTMLCanvasElement>document.getElementById("top-gl-canvas");
     const gl: WebGL2RenderingContext | null = canvas?.getContext("webgl2");
     if (!gl) {
@@ -212,6 +213,14 @@ function resizeCanvas(gl: WebGL2RenderingContext) {
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
 }
 
+function setCurrentYear() {
+    const year = new Date().getFullYear();
+    const yearElement = document.getElementById("current-year");
+
+    if (yearElement) {
+        yearElement.textContent = year.toString();
+    }
+}
 
 
 window.onload = main;
